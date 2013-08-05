@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+package userdefaults;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -73,11 +75,37 @@ public class JUserDefaults {
 	
 	private JUserDefaults() 
 	{
+		loadStorage();
 		if (this.storageObject == null) {
 			this.storageObject = new JSONObject();
 			this.storageObject.put("storageName", "standardUserDefaults");
 			this.storageObject.put("keyValueStore", new JSONObject());
 			synchronize();
+		}
+	}
+	
+	private void loadStorage() {
+		File file = new File(storageFileName);
+		String completeFileString = "";
+		try{  	
+		  	FileInputStream fstream = new FileInputStream(file.getAbsolutePath());
+			
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String strLine;
+			
+			while ((strLine = br.readLine()) != null) {
+				completeFileString = completeFileString + strLine + "\n";
+			}
+			in.close();
+		} catch (Exception e) {
+			System.err.println("Error: " + e.getMessage());
+		}
+		
+		try {
+			this.storageObject = new org.json.JSONObject(completeFileString);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
 		}
 	}
 	
