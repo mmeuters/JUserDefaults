@@ -32,9 +32,11 @@ import org.json.*;
 
 /**
  * JUserDefaults provides a simple JSON based key value store. It was influenced
- * by NSUserDefaults in Objective-C.
+ * by NSUserDefaults.
  * JUserDefaults is implemented as a singleton and can be accessed using the
  * static methods <code>getInstance()</code> and <code>getStandardUserDefaults()</code>.
+ * Set values/objects unsing <code>put(String k, Object v)</code>. Access using
+ * <code>get(String k)</code>. Make changes persistent using <code>synchronize()</code>.
  *
  * @author Marlon Meuters (CLUSTER ONE GmbH)
  * @version 2013-07-31
