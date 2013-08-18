@@ -191,6 +191,11 @@ public class JUserDefaults {
 		return map;
 	}
 	
+	public JSONArray getJSONArray(String key) {
+		JSONArray jsonArray = getKeyValueStore().getJSONArray(key);
+		return jsonArray;
+	}
+	
 	/**
 	 * Setting objects and values to the store
 	 */
